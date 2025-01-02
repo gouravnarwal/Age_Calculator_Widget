@@ -31,12 +31,17 @@ class AgeCalculator(QWidget):
         grid.addWidget(self.output_label,3,0,1,2)
 
     def calculate_age(self):
-        current_year = datetime.now().year
-        date_of_birth =self.dob_line_edit.text()
-        name = self.name_line_edit.text()
-        year_of_birth = datetime.strptime(date_of_birth,"%d/%m/%Y").date().year
-        age = current_year - year_of_birth
-        self.output_label.setText(f"{name} is {age} years old")
+        try:
+            current_year = datetime.now().year
+            date_of_birth =self.dob_line_edit.text()
+            name = self.name_line_edit.text()
+            year_of_birth = datetime.strptime(date_of_birth,"%d/%m/%Y").date().year
+            age = current_year - year_of_birth
+            self.output_label.setText(f"{name} is {age} years old")
+
+        except ValueError:
+            error_text="Please enter Name and DOB correctly"
+            self.output_label.setText(error_text)
 
 
 
